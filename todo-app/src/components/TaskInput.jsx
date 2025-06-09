@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../features/todos/todosSlice";
 
-const TaskInput = ({ onAddTask }) => {
+const TaskInput = () => {
   const [task, setTask] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmed = task.trim();
     if (!trimmed) return;
-
-    onAddTask(trimmed); // pass the task to parent
-    setTask(""); // clear input
+    dispatch(addTodo(trimmed));
+    setTask("");
   };
 
   return (

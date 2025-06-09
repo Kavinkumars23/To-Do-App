@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, onToggleTask, onDeleteTask }) => {
+const TaskList = () => {
+  const tasks = useSelector((state) => state.todos);
+
   if (tasks.length === 0) {
     return (
       <p className="text-gray-500 text-center italic mt-8 animate-pulse">
@@ -21,11 +24,7 @@ const TaskList = ({ tasks, onToggleTask, onDeleteTask }) => {
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.2 }}
           >
-            <TaskItem
-              task={task}
-              onToggle={onToggleTask}
-              onDelete={onDeleteTask}
-            />
+            <TaskItem task={task} />
           </motion.li>
         ))}
       </AnimatePresence>
